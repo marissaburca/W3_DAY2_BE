@@ -1,9 +1,6 @@
 package org.marissaburca.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity // indica che classe va mappata a tabella database
@@ -18,6 +15,7 @@ public class Evento {
     @Column(name = "description")
     private String descrizione;
     @Column(name = "event_type")
+    @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
     @Column(name = "max_partecipants")
     private int numeroMassimoPartecipanti;
@@ -29,7 +27,8 @@ public class Evento {
         this.tipoEvento = tipoEvento;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
- //setter
+
+    //setter
     public void setTitolo ( String titolo ) {
         this.titolo = titolo;
     }
