@@ -17,7 +17,7 @@ public class Application {
         EntityManager em = emf.createEntityManager(); // Entity Manager è responsabile della gestione delle interazioni col DB
         EventoDAO ed = new EventoDAO (em);
 
-        Evento nuovo = new Evento("Festa Laurea", LocalDate.of(2023,12,23),"Nuova festa laurea super cool", TipoEvento.PUBBLICO,50 );
+        Evento nuovo = new Evento("Festa Laurea", LocalDate.of(2023,12,23),"Nuova festa laurea super cool", TipoEvento.PUBBLICO,50);
         ed.save(nuovo);
     }
 }

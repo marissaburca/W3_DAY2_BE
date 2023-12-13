@@ -1,51 +1,44 @@
 package org.marissaburca.dao;
-
-import org.marissaburca.entities.Evento;
-
+import org.marissaburca.entities.Persona;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class EventoDAO {
-    //nasconde dettagli implementativi dei metodi che accedono al database
-    //per non sovraccaricare database di richieste si opera in uno strato mediano (peristense context)
-    //nel quale lo sviluppatore apporta modifiche e poi chiama il metodo che aggiornato tutto in una volta sola
-
+public class PersonaDAO {
     private final EntityManager em; //permette interazione con database
 
-    public EventoDAO ( EntityManager em ) {
+    public PersonaDAO ( EntityManager em ) {
         this.em = em;
     }
     //****************** SAVE *****************
-    public void save( Evento evento ){
+    public void save( Persona persona ){
         //transazione fornita da EntityManger
         EntityTransaction transaction = em.getTransaction();
 
         transaction.begin(); //inizio transazione
-        em.persist(evento); //aggiungo evento a db (non ancora salvato)
+        em.persist(persona); //aggiungo evento a db (non ancora salvato)
         transaction.commit(); //concludo transactioin con commit
-        System.out.println( "Event" + evento.getTitolo() + " successfully added to table"); //riscontro
+        System.out.println(persona.getNome() + " " + persona.getCognome() + " successfully added to table"); //riscontro
     }
 
     //****************** FIND BY ID *****************
-    public Evento findById(long id) {
+    public Persona findById(long id) {
         // SELECT * FROM students WHERE id = 1
-        return em.find(Evento.class, id); // Primo parametro Entity, secondo ID
+        return em.find(Persona.class, id); // Primo parametro Entity, secondo ID
     }
 
     //****************** DELETE *****************
     public void findByIdAndDelete(long id){
-        Evento found = this.findById(id); //cerco studente
+        Persona found = this.findById(id); //cerco studente
         if(found != null){
             //lo elimino con i seguenti passaggi
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             em.remove(found);
             transaction.commit();
-            System.out.println( "Event" + found.getTitolo() + " successfully deleted from table");
+            System.out.println( found.getNome() + " " + found.getCognome() + " successfully deleted from table");
         }else {
             //in caso evento non trovato
-            System.out.println( "Event not found");
+            System.out.println("Person not found");
         }
     }
-
 }

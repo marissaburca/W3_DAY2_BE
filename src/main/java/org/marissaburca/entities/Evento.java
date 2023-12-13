@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Table(name = "events") //specifico nome tabella
 public class Evento {
     @Id //CHIAVE PRIMARIA - OBBLIGATORIA
+    @GeneratedValue
     private long id;
     @Column(name = "title") //personalizza nome colonna - opzionale
     private String titolo;
@@ -19,14 +20,20 @@ public class Evento {
     private TipoEvento tipoEvento;
     @Column(name = "max_partecipants")
     private int numeroMassimoPartecipanti;
+    /*@ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;*/
 
-    public Evento ( String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti ) {
+    //Costruttore
+    public Evento ( String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.tipoEvento = tipoEvento;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
+       // this.location = location;
     }
+
 
     //setter
     public void setTitolo ( String titolo ) {
