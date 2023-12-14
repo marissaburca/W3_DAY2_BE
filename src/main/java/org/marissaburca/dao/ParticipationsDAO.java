@@ -17,7 +17,7 @@ public class ParticipationsDAO {
         transaction.begin(); //inizio transazione
         em.persist(participation); //aggiungo evento a db (non ancora salvato)
         transaction.commit(); //concludo transactioin con commit
-        System.out.println(Participations.getPersona() +" successfully added to table"); //riscontro
+        System.out.println(participation.getPersona() +" successfully added to table"); //riscontro
     }
 
     //****************** FIND BY ID *****************
@@ -35,7 +35,7 @@ public class ParticipationsDAO {
             transaction.begin();
             em.remove(found);
             transaction.commit();
-            System.out.println(Participations.getPersona() +" successfully deleted from table");
+            System.out.println(found.getPersona() +" successfully deleted from table");
         }else {
             //in caso evento non trovato
             System.out.println("Participation not found");

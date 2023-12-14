@@ -21,8 +21,9 @@ public class Persona {
     @Column(name = "sex")
     @Enumerated(EnumType.STRING)
     private Sex sesso;
-    //@Column(name = "participations")
-    //private List<Participations> partecipazioni;
+    @OneToMany(mappedBy = "")
+    @Column(name = "participations")
+    private List<Participations> partecipazioni;
 
     @ManyToOne
     @JoinColumn(name = "person_id", nullable = false)
@@ -36,7 +37,7 @@ public class Persona {
         this.email = email;
         this.dataDiNascita = dataDiNascita;
         this.sesso = sesso;
-        //this.partecipazioni = partecipazioni;
+        this.partecipazioni = partecipazioni;
     }
 
 
@@ -62,9 +63,9 @@ public class Persona {
         return sesso;
     }
 
-    /*public List<Participations> getPartecipazioni () {
+    public List<Participations> getPartecipazioni () {
         return partecipazioni;
-    }*/
+    }
 
 
     //Setter
@@ -89,7 +90,7 @@ public class Persona {
         this.sesso = sesso;
     }
 
-    /*public void setPartecipazioni ( List<Participations> partecipazioni ) {
+    public void setPartecipazioni ( List<Participations> partecipazioni ) {
         this.partecipazioni = partecipazioni;
-    }*/
+    }
 }

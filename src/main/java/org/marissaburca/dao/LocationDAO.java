@@ -11,7 +11,7 @@ public class LocationDAO {
         this.em = em;
     }
     //****************** SAVE *****************
-    public void save( Persona location ){
+    public void saveLocation( Location location ){
         //transazione fornita da EntityManger
         EntityTransaction transaction = em.getTransaction();
 

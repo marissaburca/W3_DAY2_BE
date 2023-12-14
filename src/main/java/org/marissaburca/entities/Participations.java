@@ -8,33 +8,36 @@ public class Participations {
     @Id //CHIAVE PRIMARIA - OBBLIGATORIA
     @GeneratedValue
     private long id;
-    @Column(name="persone")
-    private static Persona persona;
-    //@Column(name="eventi")
-    //private Evento evento;
+    @ManyToOne
+    @JoinColumn(name="participation_id")
+    private Persona persona;
+    @ManyToOne
+    @JoinColumn(name="eventi")
+    private Evento evento;
     @Column(name="stato")
     @Enumerated(EnumType.STRING)
     private Stato stato;
 
     //Costruttore
-    public Participations ( Persona persona, Stato stato ) {
+    public Participations ( Persona persona,Evento evento, Stato stato ) {
         this.persona = persona;
-        //this.evento = evento;
+        this.evento = evento;
         this.stato = stato;
     }
+    public Participations(){}
 
     //Getter
     public long getId () {
         return id;
     }
 
-    public static Persona getPersona () {
+    public Persona getPersona () {
         return persona;
     }
 
-    /*public Evento getEvento () {
+    public Evento getEvento () {
         return evento;
-    }*/
+    }
 
     public Stato getStato () {
         return stato;
@@ -46,9 +49,9 @@ public class Participations {
         this.persona = persona;
     }
 
-   /* public void setEvento ( Evento evento ) {
+   public void setEvento ( Evento evento ) {
         this.evento = evento;
-    }*/
+    }
 
     public void setStato ( Stato stato ) {
         this.stato = stato;

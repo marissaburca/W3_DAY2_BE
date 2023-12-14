@@ -2,9 +2,15 @@ package org.marissaburca.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity // indica che classe va mappata a tabella database
 @Table(name = "events") //specifico nome tabella
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name = "event_type")
+@NamedQuery(name = "getStreaming", query = "SELECT c FROM Evento c WHERE c.streaming = :streaming")
+@NamedQuery(name = "getConcertPerGenre", query = "SELECT c FROM Evento c WHERE c.genre = :genre")
+
 public class Evento {
     @Id //CHIAVE PRIMARIA - OBBLIGATORIA
     @GeneratedValue
@@ -20,18 +26,20 @@ public class Evento {
     private TipoEvento tipoEvento;
     @Column(name = "max_partecipants")
     private int numeroMassimoPartecipanti;
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "location_id")
-    private Location location;*/
+    private Location location;
+    @OneToMany(mappedBy="evento")
+    private List<Participations> participations;
 
     //Costruttore
-    public Evento ( String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
+    public Evento ( String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti, Location location) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.tipoEvento = tipoEvento;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
-       // this.location = location;
+        this.location = location;
     }
 
 

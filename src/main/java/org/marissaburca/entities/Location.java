@@ -14,8 +14,8 @@ public class Location {
     private String nome;
     @Column(name="city")
     private String città;
-    /*@OneToMany(mappedBy = "location")
-    private List<Evento> eventi = new ArrayList<>();*/
+    @OneToMany(mappedBy = "persona")
+    private List<Participations> participations= new ArrayList<>();
 
     //Costruttore
     public Location ( String nome, String città ) {

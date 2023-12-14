@@ -1,5 +1,6 @@
 package org.marissaburca.dao;
 
+import org.marissaburca.entities.Concert;
 import org.marissaburca.entities.Evento;
 
 import javax.persistence.EntityManager;
@@ -15,6 +16,9 @@ public class EventoDAO {
     public EventoDAO ( EntityManager em ) {
         this.em = em;
     }
+
+    public Concert getConcertInStreaming(){};
+    public Concert getConcertPerGenre(){};
     //****************** SAVE *****************
     public void save( Evento evento ){
         //transazione fornita da EntityManger
