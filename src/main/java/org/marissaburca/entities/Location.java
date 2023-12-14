@@ -22,6 +22,7 @@ public class Location {
         this.nome = nome;
         this.città = città;
     }
+    public Location(){};
 
     //getter
     public long getId () {
@@ -44,5 +45,10 @@ public class Location {
 
     public void setCittà ( String città ) {
         this.città = città;
+    }
+
+    @Override
+    public String toString () {
+        return "Location " +  nome + " a " + città ;
     }
 }

@@ -8,29 +8,26 @@ import java.util.List;
 @Table(name = "events") //specifico nome tabella
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorColumn(name = "event_type")
-@NamedQuery(name = "getStreaming", query = "SELECT c FROM Evento c WHERE c.streaming = :streaming")
-@NamedQuery(name = "getConcertPerGenre", query = "SELECT c FROM Evento c WHERE c.genre = :genre")
-
-public class Evento {
+public abstract class Evento {
     @Id //CHIAVE PRIMARIA - OBBLIGATORIA
     @GeneratedValue
-    private long id;
+    protected long id;
     @Column(name = "title") //personalizza nome colonna - opzionale
-    private String titolo;
+    protected String titolo;
     @Column(name = "event")
-    private LocalDate dataEvento;
+    protected LocalDate dataEvento;
     @Column(name = "description")
-    private String descrizione;
+    protected String descrizione;
     @Column(name = "event_type")
     @Enumerated(EnumType.STRING)
-    private TipoEvento tipoEvento;
+    protected TipoEvento tipoEvento;
     @Column(name = "max_partecipants")
-    private int numeroMassimoPartecipanti;
+    protected int numeroMassimoPartecipanti;
     @ManyToOne
     @JoinColumn(name = "location_id")
-    private Location location;
+    protected Location location;
     @OneToMany(mappedBy="evento")
-    private List<Participations> participations;
+    protected List<Participations> participations;
 
     //Costruttore
     public Evento ( String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti, Location location) {
@@ -41,7 +38,7 @@ public class Evento {
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
         this.location = location;
     }
-
+    public Evento(){};
 
     //setter
     public void setTitolo ( String titolo ) {
@@ -63,6 +60,14 @@ public class Evento {
     public void setNumeroMassimoPartecipanti ( int numeroMassimoPartecipanti ) {
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
+
+    public void setLocation ( Location location ) {
+        this.location = location;
+    }
+
+    public void setParticipations ( List<Participations> participations ) {
+        this.participations = participations;
+    }
     //getter
 
     public String getTitolo () {
@@ -83,5 +88,17 @@ public class Evento {
 
     public int getNumeroMassimoPartecipanti () {
         return numeroMassimoPartecipanti;
+    }
+    public Location getLocation () {
+        return location;
+    }
+
+    public List<Participations> getParticipations () {
+        return participations;
+    }
+
+    @Override
+    public String toString () {
+        return "Event " + "id= " + id + ", titolo= " + titolo + ", dataEvento= " + dataEvento + ", descrizione= " + descrizione + ", tipoEvento=" + tipoEvento + ", numeroMassimoPartecipanti= " + numeroMassimoPartecipanti + ", location= " + location + '}';
     }
 }

@@ -26,7 +26,7 @@ public class Persona {
     private List<Participations> partecipazioni;
 
     @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(name = "person_id")
     private Evento evento; // <--- FOREIGN KEY
 
     //Costruttore
@@ -39,7 +39,7 @@ public class Persona {
         this.sesso = sesso;
         this.partecipazioni = partecipazioni;
     }
-
+    public Persona(){};
 
     //Getter
 
